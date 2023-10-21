@@ -33,28 +33,31 @@ $rows2 = $stmt2->fetchAll(PDO::FETCH_OBJ);
             <hr>
             <form action="crear_solicitud.php" method="post" class="needs-validation" novalidate>
                 <div class="row g-3">
-                    <div class="col-sm-12">
-                        <label for="nombre" class="form-label">Nombre </label>
+                    <div class="col-sm-6">
+                        <label for="nombre" class="form-label">Nombres </label>
                         <input type="text" class="form-control" id="nombre" name="nombre" value="<?= $row->nombre_empleado ?>" readonly="readonly">
                     </div>
-                    <div class="col-6">
+
+                    <div class="col-sm-6">
+                        <label for="nombre" class="form-label">Apellidos </label>
+                        <input type="text" class="form-control" id="nombre" name="nombre" value="<?= $row->nombre_empleado ?>" readonly="readonly">
+                    </div>
+
+                    <div class="col-4">
                         <label for="cargo" class="form-label">Cargo</label>
                         <div class="input-group has-validation">
                             <input type="text" class="form-control" id="cargo" name="cargo" value="<?= $row->nombre_cargo ?>" readonly=" readonly">
                         </div>
                     </div>
-                    <div class="col-6">
-                        <label for="area" class="form-label">Area o Dependencia</label>
+                    <div class="col-4">
+                        <label for="area" class="form-label">Dependencia</label>
                         <input type="text" class="form-control" id="area" name="area" value="<?= $row->nombre_area ?>" readonly="readonly">
                     </div>
-                    <div class="col-sm-6">
-                        <label for="fecha_inicio" class="form-label">Fecha y Hora de salida</label>
+                    <div class="col-sm-4">
+                        <label for="fecha_inicio" class="form-label">Fecha de solicitud</label>
                         <input id="fecha_inicio" class="form-control" type="datetime-local" min="<?= date('Y-m-d h:i') ?>" name="fecha_inicio" required />
                     </div>
-                    <div class="col-sm-6">
-                        <label for="fecha_final" class="form-label">Fecha y Hora de Regreso</label>
-                        <input id="fecha_final" class="form-control" type="datetime-local" min="<?= date('Y-m-d h:i') ?>" name="fecha_final" required />
-                    </div>
+                    
                     <div class="col-md-6">
                         <label for="motivo_solicitud" class="form-label">Motivo</label>
                         <select class="form-select" name="motivo_solicitud" id="motivo_solicitud" required>
@@ -63,18 +66,29 @@ $rows2 = $stmt2->fetchAll(PDO::FETCH_OBJ);
                             <?php } ?>
                         </select>
                     </div>
+
                     <div class="col-md-6">
+                            <label for="country" class="form-label">Lugar</label>
+                            <select class="form-select" id="country" required>
+                                <option value="">Seleccionar...</option>
+                                <option>Pre-Jardin</option>
+                                </select>
+                            <div class="invalid-feedback">
+                                Please select a valid country.
+                            </div>
+                        </div>
+
+                    <div class="col-md-12">
                         <br>
                         <h6 class="mb-1">
-                            <hx4>NOTA: En cada uno de estos permisos solicitados por el empleado se debe
-                                anexar soporte</hx4>
+                            <hx4>Su solicitud será procesada y atendida lo más pronto posible. Recuerde verificar el estado de la solicitud y las indicaciones que se le brindaran durante el proceso por medio de su correo electronico</hx4>
                         </h6>
                     </div>
                     <hr>
                     <br class="my-4">
                     <div class="row gy-6">
                         <div-- class="col-md-12">
-                            <label for="observaciones" class="form-label">Observaciones <span class="text-muted"></span></label>
+                            <label for="observaciones" class="form-label">Observaciones <span class="text-muted">(Especificar lugar)</span></label>
                             <textarea class="form-control" rows="2" id="observaciones" name="observaciones" spellcheck="true" required></textarea>
                     </div>
                     <br>
