@@ -34,7 +34,7 @@ if (isset($_SESSION['id'])) {
     $rango->execute();
     $rows2 = $rango->fetchAll(PDO::FETCH_OBJ);
 
-?>
+    ?>
     <br><br><br>
     <!-- leyenda inicio-->
     <div class="height-100 bg-light container">
@@ -51,7 +51,9 @@ if (isset($_SESSION['id'])) {
                     <div class="col-sm-2">
                         <select class="form-select" aria-label="Default select example" name="filtro1">
                             <?php foreach ($area_filtro as $row1) { ?>
-                                <option value="<?= $row1->id ?>"> <?= $row1->nombre ?> </option>
+                                <option value="<?= $row1->id ?>">
+                                    <?= $row1->nombre ?>
+                                </option>
                             <?php } ?>
                         </select>
                     </div>
@@ -82,28 +84,39 @@ if (isset($_SESSION['id'])) {
                     <tbody>
                         <?php foreach ($rows as $row) { ?>
                             <tr>
-                                <td><?= $row->id_solicitud ?></td>
-                                <td><?= $row->nombre_empleado ?></td>
                                 <td>
-                                    <input class="form-control-plaintext" id="usuario" name="usuario" value="<?= $row->usuario ?>" />
+                                    <?= $row->id_solicitud ?>
                                 </td>
-                                <td><?= $row->nombre_area ?></td>
-                                <td><?= $row->nombre_cargo ?></td>
-                                <td><?= $row->nombre_estado ?></td>
+                                <td>
+                                    <?= $row->nombre_empleado ?>
+                                </td>
+                                <td>
+                                    <input class="form-control-plaintext" id="usuario" name="usuario"
+                                        value="<?= $row->usuario ?>" />
+                                </td>
+                                <td>
+                                    <?= $row->nombre_area ?>
+                                </td>
+                                <td>
+                                    <?= $row->nombre_cargo ?>
+                                </td>
+                                <td>
+                                    <?= $row->nombre_estado ?>
+                                </td>
                                 <td>
                                     <a href="pdf.php?id=<?= $row->id_solicitud ?>" class="btn btn-warning">Ver Documento</a>
                                 </td>
-        </div>
-        </tr>
-    <?php } ?>
-    </tbody>
-    </table>
-    </form>
+            </div>
+            </tr>
+        <?php } ?>
+        </tbody>
+        </table>
+        </form>
     </div>
     </div>
 
     <hr>
-<?php
+    <?php
     include('piedepagina.php');
 } else {
     header('Location: log_in.php');

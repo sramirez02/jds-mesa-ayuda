@@ -10,7 +10,7 @@ if (isset($_SESSION['id'])) {
         $id = $_GET['id'];
         $_SESSION['id_soli_r'] = $id;
 
-        $stmt = $conn->prepare("SELECT empleado.nombre AS nombre_empleado, area.nombre AS nombre_area, cargo.nombre AS nombre_cargo, solicitud.fecha_inicio, solicitud.fecha_final, solicitud.numero_horas, cargo.salario, motivo_solicitud.id AS id_motivo, motivo_solicitud.nombre AS nombre_motivo, solicitud.observaciones FROM ((((solicitud 
+        $stmt = $conn->prepare("SELECT empleado.nombre AS nombre_empleado, solicitud.lugar, area.nombre AS nombre_area, cargo.nombre AS nombre_cargo, solicitud.fecha_registro, solicitud.fecha_final, solicitud.numero_horas, cargo.salario, motivo_solicitud.id AS id_motivo, motivo_solicitud.nombre AS nombre_motivo, solicitud.observaciones FROM ((((solicitud 
                                 INNER JOIN motivo_solicitud ON solicitud.id_motivo = motivo_solicitud.id) 
                                 INNER JOIN empleado ON solicitud.id_empleado = empleado.id)
                                 INNER JOIN cargo ON empleado.id_cargo = cargo.id)
@@ -28,7 +28,7 @@ if (isset($_SESSION['id'])) {
 
     $importe = $salariohora * $numero_horas;
 
-?>
+    ?>
     <br><br><br>
     <div class="height-100 bg-light container">
         <div class="row">
@@ -43,74 +43,93 @@ if (isset($_SESSION['id'])) {
                     <div class="row g-3">
                         <div class="col-sm-12">
                             <label for="nombre" class="form-label">Nombre </label>
-                            <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre" value="<?= $row->nombre_empleado ?>" required disabled>
+                            <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre"
+                                value="<?= $row->nombre_empleado ?>" required disabled>
                             <div class="invalid-feedback">
                                 Valid first name is required.
                             </div>
                         </div>
 
-                        <hr>
-                        <div class="col-12">
+
+                        <div class="col-6">
                             <label for="area" class="form-label">Area o Dependencia</label>
-                            <input type="text" class="form-control" id="area" name="area" placeholder="Area o Dependencia" value="<?= $row->nombre_area ?>" required disabled>
+                            <input type="text" class="form-control" id="area" name="area" placeholder="Area o Dependencia"
+                                value="<?= $row->nombre_area ?>" required disabled>
                         </div>
 
-                        <div class="col-12">
+                        <div class="col-6">
                             <label for="cargo" class="form-label">Cargo</label>
                             <!--div class="input-group has-validation"-->
-                            <input type="text" class="form-control" id="cargo" name="cargo" placeholder="Cargo" value="<?= $row->nombre_cargo ?>" required disabled>
+                            <input type="text" class="form-control" id="cargo" name="cargo" placeholder="Cargo"
+                                value="<?= $row->nombre_cargo ?>" required disabled>
                             <!--div-->
                         </div>
-                        <hr>
-                        <div class="col-sm-6">
-                            <label for="fecha_inicio" class="form-label">Fecha y Hora de salida</label>
-                            <input id="fecha_inicio" class="form-control" type="datetime-local" name="fecha_inicio" min="<?= date('Y-m-d h:i') ?>" value="<?= $row->fecha_inicio ?>" required disabled />
-                        </div>
-                        <div class="col-sm-6">
-                            <label for="fecha_final" class="form-label">Fecha y Hora de Regreso</label>
-                            <input id="fecha_final" class="form-control" type="datetime-local" name="fecha_final" min="<?= date('Y-m-d h:i') ?>" value="<?= $row->fecha_final ?>" required disabled />
+
+                        <div class="col-sm-4">
+                            <label for="fecha_inicio" class="form-label">Fecha registro</label>
+                            <input id="fecha_inicio" class="form-control" type="datetime-local" name="fecha_inicio"
+                                min="<?= date('Y-m-d h:i') ?>" value="<?= $row->fecha_registro ?>" required disabled />
                         </div>
 
-                        <div class="col-sm-3">
-                            <label for="importe" class="form-label">Valor Importe Permiso</label>
-                            <input type="number" class="form-control" id="importe" name="importe" value="<?= $importe ?>" readonly="readonly">
-                        </div>
 
-                        <div class="col-md-6">
+                        <div class="col-sm-4">
                             <label for="motivo" class="form-label">Motivo</label>
                             <select class="form-select" id="motivo" required disabled>
-                                <option value="<?= $row->id_motivo ?>"><?= $row->nombre_motivo ?></option>
+                                <option value="<?= $row->id_motivo ?>">
+                                    <?= $row->nombre_motivo ?>
+                                </option>
                             </select>
-                            <div class="invalid-feedback">
-                                Please select a valid country.
-                            </div>
                         </div>
+
+                        <div class="col-sm-4">
+                            <label for="lugar" class="form-label">Lugar</label>
+                            <input id="lugar" class="form-control" name="lugar" value="<?= $row->lugar ?>" required
+                                disabled />
+                        </div>
+
                     </div>
-                    <hr>
+
                     <br class="my-4">
                     <div class="row gy-6">
                         <div class="col-md-12">
                             <label for="observaciones" class="form-label">Observaciones </label>
-                            <textarea class="form-control" rows="2" id="observaciones" name="observaciones"><?= $row->observaciones ?></textarea>
+                            <textarea class="form-control" rows="2" id="observaciones"
+                                name="observaciones"><?= $row->observaciones ?></textarea>
                         </div>
-                    </div>
-                    <hr>
 
-                    <!-- boton autorizar -->
-                    <div class="row g-">
-                        <button type="button" class="w-100 btn btn-success btn-lg" data-bs-toggle="modal" data-bs-target="#staticBackdropautorizar">
-                            Autorizar solicitud
-                        </button>
+                    </div>
+
+
+                    <br>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-6"></div>
+                        <!-- boton negar -->
+                        <div class="col-md-3">
+                            <button type="button" class="w-100 btn btn-danger btn-lg" data-bs-toggle="modal"
+                                data-bs-target="#staticBackdropnegar">
+                                Denegar solicitud
+                            </button>
+                        </div>
+                        <!-- boton autorizar -->
+                        <div class="col-md-3">
+                            <button type="button" class="w-100 btn btn-success btn-lg" data-bs-toggle="modal"
+                                data-bs-target="#staticBackdropautorizar">
+                                Completar solicitud
+                            </button>
+                        </div>
                     </div>
 
                     <!-- Modal autorizar -->
-                    <div class="modal fade" id="staticBackdropautorizar" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal fade" id="staticBackdropautorizar" data-bs-backdrop="static" data-bs-keyboard="false"
+                        tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h5 class="modal-title" id="staticBackdropLabel"><b>Autorizar solicitud ?</b></h5>
                                     <a href="#">
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
                                     </a>
                                 </div>
                                 <div class="modal-body">
@@ -118,9 +137,11 @@ if (isset($_SESSION['id'])) {
                                 </div>
                                 <div class="modal-footer">
                                     <a href="#">
-                                        <button type="subbmit" name="autorizar" value="1" class="btn btn-success" data-bs-toggle="modal">Enviar</button>
+                                        <button type="subbmit" name="autorizar" value="1" class="btn btn-success"
+                                            data-bs-toggle="modal">Enviar</button>
                                     </a>
-                                    <a href="#" <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+                                    <a href="#" <button type="button" class="btn btn-danger"
+                                        data-bs-dismiss="modal">Cerrar</button>
                                     </a>
                                 </div>
                             </div>
@@ -128,20 +149,17 @@ if (isset($_SESSION['id'])) {
                     </div>
                     <br>
 
-                    <!-- boton negar -->
-                    <div class="row g-">
-                        <button type="button" class="w-100 btn btn-danger btn-lg" data-bs-toggle="modal" data-bs-target="#staticBackdropnegar">
-                            Negar solicitud
-                        </button>
-                    </div>
+
                     <!-- Modal negar -->
-                    <div class="modal fade" id="staticBackdropnegar" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal fade" id="staticBackdropnegar" data-bs-backdrop="static" data-bs-keyboard="false"
+                        tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h5 class="modal-title" id="staticBackdropLabel"><b>Negar solicitud ?</b></h5>
                                     <a href="#">
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
                                     </a>
                                 </div>
                                 <div class="modal-body">
@@ -149,9 +167,11 @@ if (isset($_SESSION['id'])) {
                                 </div>
                                 <div class="modal-footer">
                                     <a href="#">
-                                        <button type="subbmit" name="negar" value="2" class="btn btn-success" data-bs-toggle="modal">Enviar</button>
+                                        <button type="subbmit" name="negar" value="2" class="btn btn-success"
+                                            data-bs-toggle="modal">Enviar</button>
                                     </a>
-                                    <a href="#" <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+                                    <a href="#" <button type="button" class="btn btn-danger"
+                                        data-bs-dismiss="modal">Cerrar</button>
                                     </a>
                                 </div>
                             </div>
@@ -162,9 +182,9 @@ if (isset($_SESSION['id'])) {
             </div>
         </div>
     </div>
-    <hr>
 
-<?php
+
+    <?php
     $conn = null;
     require_once('piedepagina.php');
 } else {

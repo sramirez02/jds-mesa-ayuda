@@ -15,8 +15,8 @@ if (isset($_SESSION['id'])) {
     $rows = $stmt->fetchAll(PDO::FETCH_OBJ);
 
 
-?>
-<br><br><br>
+    ?>
+    <br><br><br>
     <!-- leyenda inicio-->
     <div class="height-100 bg-light container">
         <div class="row">
@@ -43,18 +43,26 @@ if (isset($_SESSION['id'])) {
 
                     <?php
                     foreach ($rows as $row) {
-                    ?>
+                        ?>
                         <tr>
-                            <td><?= $row->id ?></td>
-                            <td><?= $row->nombre_motivo ?></td>
-                            <td><?= $row->fecha_registro ?></td>
-                            <td><?= $row->nombre ?></td>
+                            <td>
+                                <?= $row->id ?>
+                            </td>
+                            <td>
+                                <?= $row->nombre_motivo ?>
+                            </td>
+                            <td>
+                                <?= $row->fecha_registro ?>
+                            </td>
+                            <td>
+                                <?= $row->nombre ?>
+                            </td>
 
                             <td>
                                 <a href="pendientesGG.php?id=<?= $row->id ?>" class="btn btn-secondary">Gestionar</a>
                             </td>
                         </tr>
-                    <?php
+                        <?php
                     }
                     ?>
                 </tbody>
@@ -63,7 +71,7 @@ if (isset($_SESSION['id'])) {
     </div>
 
     <hr>
-<?php
+    <?php
 
     $conn = null;
     require_once('piedepagina.php');

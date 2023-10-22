@@ -1,4 +1,4 @@
-            <!--'footer' se utiliza para colocar el pie de pagina de la pagina, 
+<!--'footer' se utiliza para colocar el pie de pagina de la pagina, 
     se piueden poner muchas-->
 <footer class="footer">
     <div class="container-fluid">

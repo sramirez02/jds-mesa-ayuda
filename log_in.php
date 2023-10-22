@@ -77,11 +77,13 @@ if (isset($_SESSION['id'])) {
                 <form class="w-75" action="validar.php" method="post">
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">Usuario</label>
-                        <input type="text" class="form-control" id="exampleFormControlInput1" name="usuario" placeholder="usuario" required>
+                        <input type="text" class="form-control" id="exampleFormControlInput1" name="usuario"
+                            placeholder="usuario" required>
                     </div>
                     <div class="mb-3">
                         <label for="exampleFormControlInput2" class="form-label">Contraseña</label>
-                        <input type="password" class="form-control" id="exampleFormControlInput2" name="contrasena" placeholder="contraseña" required>
+                        <input type="password" class="form-control" id="exampleFormControlInput2" name="contrasena"
+                            placeholder="contraseña" required>
                     </div>
                     <!-- TODO: quitar etiqueta <a> y dejar solo boton -->
 
@@ -100,6 +102,6 @@ if (isset($_SESSION['id'])) {
 
     <br>
     <br>
-<?php
+    <?php
 }
 ?>

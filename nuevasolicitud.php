@@ -51,7 +51,7 @@ if (isset($_SESSION['id'])) {
                             <input class="form-control" rows="2" id="lugar" name="lugar" spellcheck="true" required></input>
                         </div>
 
-                                
+
                         <br>
 
                         <div class="row mt-3">

@@ -1,18 +1,17 @@
-    <?php
-    if (isset($_POST['modificar'])) {
-        
-        $rango         =     ($_REQUEST['rango']);
-        $usuario       =     ($_REQUEST['usuario']); 
+<?php
+if (isset($_POST['modificar'])) {
 
-        require_once('conexiondb.php');
+    $rango = ($_REQUEST['rango']);
+    $usuario = ($_REQUEST['usuario']);
 
-        $sql4 = "UPDATE empleado SET id_rango = $rango WHERE usuario  = '$usuario'";
+    require_once('conexiondb.php');
+
+    $sql4 = "UPDATE empleado SET id_rango = $rango WHERE usuario  = '$usuario'";
 
 
-        $conn->exec($sql4);
+    $conn->exec($sql4);
 
-        $conn = null;
-    }
-    header('location:parametrizacion.php?e=ok');
-    ?>
-
+    $conn = null;
+}
+header('location:parametrizacion.php?e=ok');
+?>

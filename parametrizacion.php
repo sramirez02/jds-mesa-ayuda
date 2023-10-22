@@ -30,19 +30,20 @@ if (isset($_SESSION['id'])) {
     $rango->execute();
     $rows2 = $rango->fetchAll(PDO::FETCH_OBJ);
 
-?>
+    ?>
     <br><br><br>
     <!-- leyenda inicio-->
     <div class="height-100 bg-light container">
         <div class="row">
             <h2> Parametrizacion </h2>
-            <?php 
-            if (isset($_GET['e'])) { 
+            <?php
+            if (isset($_GET['e'])) {
                 echo '
             <div class="alert alert-success alert-dismissible fade show" role="alert">
                 <strong> Cambio guardado!!</strong>
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>'; } ?>
+            </div>';
+            } ?>
         </div>
         <hr>
         <div class="row g-5">
@@ -54,7 +55,9 @@ if (isset($_SESSION['id'])) {
                     <div class="col-sm-2">
                         <select class="form-select" aria-label="Default select example" name="filtro1">
                             <?php foreach ($area_filtro as $row1) { ?>
-                                <option value="<?= $row1->id ?>"> <?= $row1->nombre ?> </option>
+                                <option value="<?= $row1->id ?>">
+                                    <?= $row1->nombre ?>
+                                </option>
                             <?php } ?>
                         </select>
                     </div>
@@ -85,12 +88,19 @@ if (isset($_SESSION['id'])) {
                     foreach ($rows as $row) { ?>
                         <form action="accion_modificar_p.php" method="POST">
                             <tr>
-                                <td><?= $row->nombre_empleado ?></td>
                                 <td>
-                                    <input class="form-control-plaintext" id="usuario" name="usuario" value="<?= $row->usuario ?>" />
+                                    <?= $row->nombre_empleado ?>
                                 </td>
-                                <td><?= $row->nombre_area ?></td>
-                                <td><?= $row->nombre_cargo ?></td>
+                                <td>
+                                    <input class="form-control-plaintext" id="usuario" name="usuario"
+                                        value="<?= $row->usuario ?>" />
+                                </td>
+                                <td>
+                                    <?= $row->nombre_area ?>
+                                </td>
+                                <td>
+                                    <?= $row->nombre_cargo ?>
+                                </td>
                                 <td>
                                     <div>
                                         <select class="form-select" aria-label="Default select example" id="rango" name="rango">
@@ -100,8 +110,10 @@ if (isset($_SESSION['id'])) {
                                                 if ($row2->id == $row->empleado_rango) {
                                                     $selected = 'selected';
                                                 }
-                                            ?>
-                                                <option <?= $selected ?> value="<?= $row2->id ?>"><?= $row2->nombre ?></option>
+                                                ?>
+                                                <option <?= $selected ?> value="<?= $row2->id ?>">
+                                                    <?= $row2->nombre ?>
+                                                </option>
                                             <?php } ?>
                                         </select>
                                     </div>
@@ -120,7 +132,7 @@ if (isset($_SESSION['id'])) {
     </div>
 
     <hr>
-<?php
+    <?php
     include('piedepagina.php');
 } else {
     header('Location: log_in.php');
