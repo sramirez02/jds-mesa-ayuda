@@ -6,9 +6,9 @@ if (isset($_SESSION['id'])) {
     require_once('conexiondb.php');
 
 
-    $stmt = $conn->prepare("SELECT solicitud.id, motivo_solicitud.nombre AS nombre_motivo, solicitud.fecha_inicio, estado.nombre FROM ((solicitud 
+    $stmt = $conn->prepare("SELECT solicitud.id, motivo_solicitud.nombre AS nombre_motivo, solicitud.fecha_registro, estado.nombre FROM ((solicitud 
         INNER JOIN motivo_solicitud ON solicitud.id_motivo = motivo_solicitud.id) 
-        INNER JOIN estado ON solicitud.id_estado = estado.id) WHERE estado.nombre='RADICADO'");
+        INNER JOIN estado ON solicitud.id_estado = estado.id) WHERE estado.id=1");
 
     $stmt->execute();
 
@@ -47,7 +47,7 @@ if (isset($_SESSION['id'])) {
                         <tr>
                             <td><?= $row->id ?></td>
                             <td><?= $row->nombre_motivo ?></td>
-                            <td><?= $row->fecha_inicio ?></td>
+                            <td><?= $row->fecha_registro ?></td>
                             <td><?= $row->nombre ?></td>
 
                             <td>

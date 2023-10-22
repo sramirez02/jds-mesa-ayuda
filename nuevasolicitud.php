@@ -47,72 +47,71 @@ if (isset($_SESSION['id'])) {
                         </div>
 
                         <div class="col-md-6">
-                            <label for="lugar" class="form-label">Lugar de la solicitud <span
-                                    class="text-muted"></span></label>
-                            <textarea class="form-control" rows="2" id="lugar" name="lugar" spellcheck="true"
-                                required></textarea>
+                            <label for="lugar" class="form-label">Lugar de la solicitud</label>
+                            <input class="form-control" rows="2" id="lugar" name="lugar" spellcheck="true" required></input>
                         </div>
 
-                        <div class="col-md-12">
-                            <br>
-                            <h6 class="mb-1">
-                                <hx4>
-                                    Su solicitud será procesada y atendida lo más pronto posible. Recuerde verificar el
-                                    estado de la solicitud y las indicaciones que se le brindaran durante el proceso por
-                                    medio de su correo electronico
-                                </hx4>
-                            </h6>
-                        </div>
-                        <hr>
-                        <br class="my-4">
-                        <div class="row gy-6">
-                            <div-- class="col-md-12">
+                                
+                        <br>
+
+                        <div class="row mt-3">
+                            <div class="col-md-12">
                                 <label for="observaciones" class="form-label">Observaciones</label>
                                 <textarea class="form-control" rows="2" id="observaciones" name="observaciones"
                                     spellcheck="true" required></textarea>
-                        </div>
-                        <br>
-                        <br>
+                            </div>
 
-                        <!-- boton enviar -->
-                        <br>
-                        <br>
-                        <br>
+                            <div class="col-md-12">
+                                <h6 class="mb-1 mt-3">
+                                    <hx4>
+                                        Su solicitud será procesada y atendida lo más pronto posible. Recuerde verificar el
+                                        estado de la solicitud y las indicaciones que se le brindaran durante el proceso por
+                                        medio de su correo electronico
+                                    </hx4>
+                                </h6>
+                            </div>
+                            <br>
+
+                            <!-- boton enviar -->
+                            <br>
+                            <br>
+                            <br>
 
 
-                        <button type="button" class="w-100 btn btn-success btn-lg" data-bs-toggle="modal"
-                            data-bs-target="#staticBackdropenviosolictud">
-                            Enviar solicitud
-                        </button>
+                            <button type="button" class="w-100 btn btn-success btn-lg" data-bs-toggle="modal"
+                                data-bs-target="#staticBackdropenviosolictud">
+                                Enviar solicitud
+                            </button>
 
-                        <!-- Modal alerta envio solicitud-->
-                        <div class="modal fade" id="staticBackdropenviosolictud" data-bs-backdrop="static"
-                            data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="staticBackdropLabel"><b>Enviar solicitud?</b></h5>
-                                        <a href="#">
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                aria-label="Close"></button>
-                                        </a>
-                                    </div>
-                                    <div class="modal-body">
-                                        Para enviar solicitud presione "Enviar" de lo contrario presione "Cerrar".
-                                    </div>
-                                    <div class="modal-footer">
-                                        <a href="#">
-                                            <button type="subbmit" class="btn btn-success" data-bs-toggle="modal"
-                                                data-bs-target="#staticBackdrop7">Enviar</button>
-                                        </a>
-                                        <a href="solicitudes.php">
-                                            <button type="button" class="btn btn-danger"
-                                                data-bs-dismiss="modal">Cerrar</button>
-                                        </a>
+                            <!-- Modal alerta envio solicitud-->
+                            <div class="modal fade" id="staticBackdropenviosolictud" data-bs-backdrop="static"
+                                data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
+                                aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="staticBackdropLabel"><b>Enviar solicitud?</b></h5>
+                                            <a href="#">
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                            </a>
+                                        </div>
+                                        <div class="modal-body">
+                                            Para enviar solicitud presione "Enviar" de lo contrario presione "Cerrar".
+                                        </div>
+                                        <div class="modal-footer">
+                                            <a href="#">
+                                                <button type="subbmit" class="btn btn-success" data-bs-toggle="modal"
+                                                    data-bs-target="#staticBackdrop7">Enviar</button>
+                                            </a>
+                                            <a href="solicitudes.php">
+                                                <button type="button" class="btn btn-danger"
+                                                    data-bs-dismiss="modal">Cerrar</button>
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
                 </form>
 

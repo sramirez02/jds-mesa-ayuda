@@ -1,6 +1,7 @@
 <?php
 session_start();
 if (isset($_SESSION['id'])) {
+    $filtro = "";
     $id_empleado = $_SESSION['id'];
     require_once('menu_superior.php');
     require_once('menu_lateral.php');
@@ -10,23 +11,21 @@ if (isset($_SESSION['id'])) {
     $mostrar->execute();
     $filtro_mostrar = $mostrar->fetchAll(PDO::FETCH_OBJ);
 
-    if (isset($_GET['filtro'])) {
-
-        $filtro = $_GET['filtro'];
-        $stmt = $conn->prepare("SELECT solicitud.id, motivo_solicitud.nombre AS nombre_motivo, solicitud.fecha_registro, estado.nombre AS nombre_estado FROM ((solicitud 
-INNER JOIN motivo_solicitud ON solicitud.id_motivo = motivo_solicitud.id) 
-INNER JOIN estado ON solicitud.id_estado = estado.id) WHERE solicitud.id_empleado = $id_empleado AND estado.id = $filtro");
-    } else {
-        $stmt = $conn->prepare("SELECT solicitud.id, motivo_solicitud.nombre AS nombre_motivo, solicitud.fecha_registro, estado.nombre AS nombre_estado FROM ((solicitud 
+    $sqlStmt = "SELECT solicitud.id, motivo_solicitud.nombre AS nombre_motivo, solicitud.fecha_registro, estado.nombre AS nombre_estado FROM ((solicitud 
         INNER JOIN motivo_solicitud ON solicitud.id_motivo = motivo_solicitud.id) 
-        INNER JOIN estado ON solicitud.id_estado = estado.id) WHERE solicitud.id_empleado = $id_empleado");
+        INNER JOIN estado ON solicitud.id_estado = estado.id) WHERE solicitud.id_empleado = $id_empleado ";
+
+    if (isset($_GET['filtro']) and !empty($_GET['filtro'])) {
+        $filtro = $_GET['filtro'];
+        $sqlStmt = $sqlStmt . "AND estado.id = $filtro";
     }
+    $stmt = $conn->prepare($sqlStmt);
     $stmt->execute();
 
     $rows = $stmt->fetchAll(PDO::FETCH_OBJ);
 
 
-?>
+    ?>
     <br><br><br><br>
     <div class="height-100 bg-light container">
         <div class="row">
@@ -43,9 +42,12 @@ INNER JOIN estado ON solicitud.id_estado = estado.id) WHERE solicitud.id_emplead
 
                     <div class="col-sm-2">
                         <select class="form-select" aria-label="Default select example" name='filtro'>
+                            <option value="">Todos</option>
                             <?php
                             foreach ($filtro_mostrar as $row1) { ?>
-                                <option value="<?= $row1->id_estado ?>"><?= $row1->nombre_estado ?></option>
+                                <option value="<?= $row1->id_estado ?>" <?= $row1->id_estado == $filtro ? "selected" : "" ?>>
+                                    <?= $row1->nombre_estado ?>
+                                </option>
                             <?php } ?>
                         </select>
                     </div>
@@ -79,22 +81,30 @@ INNER JOIN estado ON solicitud.id_estado = estado.id) WHERE solicitud.id_emplead
                     <?php
                     foreach ($rows as $row) {
 
-                    ?>
+                        ?>
 
                         <tr>
-                            <td><?= $row->id ?></td>
-                            <td><?= $row->nombre_motivo ?></td>
-                            <td><?= $row->fecha_registro ?></td>
-                            <td><?= $row->nombre_estado ?></td>
+                            <td>
+                                <?= $row->id ?>
+                            </td>
+                            <td>
+                                <?= $row->nombre_motivo ?>
+                            </td>
+                            <td>
+                                <?= $row->fecha_registro ?>
+                            </td>
+                            <td>
+                                <?= $row->nombre_estado ?>
+                            </td>
 
                             <td>
                                 <a href="verdoc.php?id=<?= $row->id ?>" class="btn btn-secondary">Ver</a>
                             </td>
                         </tr>
-                    <?php
+                        <?php
                     }
                     ?>
-                    
+
 
                 </tbody>
             </table>
@@ -102,7 +112,7 @@ INNER JOIN estado ON solicitud.id_estado = estado.id) WHERE solicitud.id_emplead
     </div>
 
 
-<?php
+    <?php
     $conn = null;
     include('piedepagina.php');
 } else {
