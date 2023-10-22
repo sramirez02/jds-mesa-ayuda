@@ -13,11 +13,11 @@ if (isset($_SESSION['id'])) {
     if (isset($_GET['filtro'])) {
 
         $filtro = $_GET['filtro'];
-        $stmt = $conn->prepare("SELECT solicitud.id, motivo_solicitud.nombre AS nombre_motivo, solicitud.fecha_inicio, estado.nombre AS nombre_estado FROM ((solicitud 
+        $stmt = $conn->prepare("SELECT solicitud.id, motivo_solicitud.nombre AS nombre_motivo, solicitud.fecha_registro, estado.nombre AS nombre_estado FROM ((solicitud 
 INNER JOIN motivo_solicitud ON solicitud.id_motivo = motivo_solicitud.id) 
 INNER JOIN estado ON solicitud.id_estado = estado.id) WHERE solicitud.id_empleado = $id_empleado AND estado.id = $filtro");
     } else {
-        $stmt = $conn->prepare("SELECT solicitud.id, motivo_solicitud.nombre AS nombre_motivo, solicitud.fecha_inicio, estado.nombre AS nombre_estado FROM ((solicitud 
+        $stmt = $conn->prepare("SELECT solicitud.id, motivo_solicitud.nombre AS nombre_motivo, solicitud.fecha_registro, estado.nombre AS nombre_estado FROM ((solicitud 
         INNER JOIN motivo_solicitud ON solicitud.id_motivo = motivo_solicitud.id) 
         INNER JOIN estado ON solicitud.id_estado = estado.id) WHERE solicitud.id_empleado = $id_empleado");
     }
@@ -84,7 +84,7 @@ INNER JOIN estado ON solicitud.id_estado = estado.id) WHERE solicitud.id_emplead
                         <tr>
                             <td><?= $row->id ?></td>
                             <td><?= $row->nombre_motivo ?></td>
-                            <td><?= $row->fecha_inicio ?></td>
+                            <td><?= $row->fecha_registro ?></td>
                             <td><?= $row->nombre_estado ?></td>
 
                             <td>
