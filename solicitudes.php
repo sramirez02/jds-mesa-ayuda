@@ -1,11 +1,48 @@
 <?php
 session_start();
+//codigo para enviar correo
+// use PHPMailer\PHPMailer\PHPMailer;
+// use PHPMailer\PHPMailer\Exception;
+
+
+// require_once('libraries/PHPMailer/src/PHPMailer.php');
+// require_once('libraries/PHPMailer/src/Exception.php');
+// require_once('libraries/PHPMailer/src/SMTP.php');
+
+
+// $destinatario = "sdanitzaramirez@gmail.com";
+// $asunto = "Proyecto JDS";
+// $mensaje = "Este es el contenido del correo.";
+
+// // Configurar el objeto PHPMailer
+// $mail = new PHPMailer();
+// $mail->isSMTP();
+// $mail->Host = 'smtp.gmail.com';
+// $mail->SMTPAuth = true;
+// $mail->Username = 'sandy.r@jordandesajonia.edu.co';
+// $mail->Password = '12345';
+// $mail->SMTPSecure = 'tls';
+// $mail->Port = 587;
+
+// $mail->setFrom($mail->Username,'Mesa de ayuda JDS');
+// $mail->addAddress($destinatario);
+// $mail->Subject = $asunto;
+// $mail->Body = $mensaje; 
+
+// // Enviar el correo
+// if($mail->send()) {
+//     echo "Correo enviado correctamente";
+// } else {
+//     echo "Error al enviar el correo: " . $mail->ErrorInfo;
+// }
+
 if (isset($_SESSION['id'])) {
     $filtro = "";
     $id_empleado = $_SESSION['id'];
     require_once('menu_superior.php');
     require_once('menu_lateral.php');
     require_once('conexiondb.php');
+
 
     $mostrar = $conn->prepare("SELECT id AS id_estado, nombre AS nombre_estado FROM estado");
     $mostrar->execute();
