@@ -1,5 +1,50 @@
 <?php
 session_start();
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+
+require_once('libraries/PHPMailer/src/PHPMailer.php');
+require_once('libraries/PHPMailer/src/Exception.php');
+require_once('libraries/PHPMailer/src/SMTP.php');
+
+// if ($_SERVER["REQUEST_METHOD"] == "POST") {
+//     // Captura los datos del formulario
+//     $nombre = $_POST['nombre'];
+//     $email = $_POST['email'];
+//     $mensaje = $_POST['mensaje'];
+
+//     $destinatario = "sdanitzaramirez@gmail.com";
+//     $asunto = "Nuevo mensaje del formulario";
+//     $cuerpoMensaje = "Nombre: $nombre\nCorreo Electrónico: $email\nMensaje: $mensaje";
+
+$destinatario = "sdanitzaramirez@gmail.com";
+$asunto = "Proyecto JDS";
+$mensaje = "Mesa de ayuda del jordan de sajonia.";
+
+// Configurar el objeto PHPMailer
+$mail = new PHPMailer();
+$mail->isSMTP();
+$mail->Host = 'smtp.gmail.com';
+$mail->SMTPAuth = true;
+$mail->Username = 'sandy.r@jordandesajonia.edu.co';
+$mail->Password = 'Jordan2023';
+$mail->SMTPSecure = 'tls';
+$mail->Port = 587;
+
+$mail->setFrom($mail->Username,'Mesa de ayuda JDS');
+$mail->addAddress($destinatario);
+$mail->Subject = $asunto;
+$mail->Body = $mensaje; 
+
+// Enviar el correo
+// if($mail->send()) {
+//     echo "Correo enviado correctamente";
+// } else {
+//     echo "Error al enviar el correo: " . $mail->ErrorInfo;
+// }
+
 if (isset($_SESSION['id'])) {
     date_default_timezone_set('America/Bogota');
     $id_empleado = $_SESSION['id'];
@@ -153,30 +198,16 @@ if (isset($_SESSION['id'])) {
         </div>
     </div>
 
+    <?php
+if($mail->send()) {
+    echo "Correo enviado correctamente";
+} else {
+    echo "Error al enviar el correo: " . $mail->ErrorInfo;
+}
+?>
+
     <!-- Modal terminos y condiciones -->
-    <div class="modal fade" id="staticBackdropterminos" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel"><b>Terminos y Condiciones</b></h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    Reconozco que por medio de esta solicitud de permiso en
-                    horarios laborales existe el riesgo de peligros, daños, lesiones y enfermedades que pudieran ocasionarme
-                    cualquier
-                    tipo de perturbación funcional, psiquiátrica, una invalidez o la muerte, y estoy de acuerdo en
-                    asumirlos,
-                    exonerando de toda responsabilidad a la empresa SERVICREDITO S.A.
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
+    
     <br>
     <?php
     $conn = null;
