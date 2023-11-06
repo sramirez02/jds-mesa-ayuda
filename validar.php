@@ -25,9 +25,7 @@ if (empty($_POST['usuario']) or empty($_POST['contrasena'])) {
             WHERE usuario = '$usuario' AND contrasena = '$contrasena' ");
         $stmt->execute();
 
-
-
-
+        
         if ($stmt->rowCount() > 0) {
             $row = $stmt->fetch(PDO::FETCH_OBJ);
             $_SESSION['id'] = $row->id;

@@ -1,49 +1,6 @@
 <?php
 session_start();
 
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
-
-
-require_once('libraries/PHPMailer/src/PHPMailer.php');
-require_once('libraries/PHPMailer/src/Exception.php');
-require_once('libraries/PHPMailer/src/SMTP.php');
-
-// if ($_SERVER["REQUEST_METHOD"] == "POST") {
-//     // Captura los datos del formulario
-//     $nombre = $_POST['nombre'];
-//     $email = $_POST['email'];
-//     $mensaje = $_POST['mensaje'];
-
-//     $destinatario = "sdanitzaramirez@gmail.com";
-//     $asunto = "Nuevo mensaje del formulario";
-//     $cuerpoMensaje = "Nombre: $nombre\nCorreo Electrónico: $email\nMensaje: $mensaje";
-
-$destinatario = "sdanitzaramirez@gmail.com";
-$asunto = "Proyecto JDS";
-$mensaje = "Mesa de ayuda del jordan de sajonia.";
-
-// Configurar el objeto PHPMailer
-$mail = new PHPMailer();
-$mail->isSMTP();
-$mail->Host = 'smtp.gmail.com';
-$mail->SMTPAuth = true;
-$mail->Username = 'sandy.r@jordandesajonia.edu.co';
-$mail->Password = 'Jordan2023';
-$mail->SMTPSecure = 'tls';
-$mail->Port = 587;
-
-$mail->setFrom($mail->Username,'Mesa de ayuda JDS');
-$mail->addAddress($destinatario);
-$mail->Subject = $asunto;
-$mail->Body = $mensaje; 
-
-// Enviar el correo
-// if($mail->send()) {
-//     echo "Correo enviado correctamente";
-// } else {
-//     echo "Error al enviar el correo: " . $mail->ErrorInfo;
-// }
 
 if (isset($_SESSION['id'])) {
     date_default_timezone_set('America/Bogota');
@@ -51,6 +8,7 @@ if (isset($_SESSION['id'])) {
     require_once('menu_superior.php');
     require_once('menu_lateral.php');
     require_once('conexiondb.php');
+
 
     $stmt = $conn->prepare("SELECT empleado.nombre AS nombre_empleado, cargo.nombre AS nombre_cargo, cargo.salario, area.nombre AS nombre_area FROM (empleado 
         INNER JOIN cargo ON empleado.id_cargo = cargo.id 
@@ -146,7 +104,7 @@ if (isset($_SESSION['id'])) {
                                         </div>
                                         <div class="modal-footer">
                                             <a href="#">
-                                                <button type="subbmit" class="btn btn-success" data-bs-toggle="modal"
+                                                <button type="submit" class="btn btn-success" data-bs-toggle="modal"
                                                     data-bs-target="#staticBackdrop7">Enviar</button>
                                             </a>
                                             <a href="solicitudes.php">
@@ -197,14 +155,6 @@ if (isset($_SESSION['id'])) {
             </div>
         </div>
     </div>
-
-    <?php
-if($mail->send()) {
-    echo "Correo enviado correctamente";
-} else {
-    echo "Error al enviar el correo: " . $mail->ErrorInfo;
-}
-?>
 
     <!-- Modal terminos y condiciones -->
     
