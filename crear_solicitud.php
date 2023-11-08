@@ -60,7 +60,7 @@ atentamente, area de soporte técnico";
     $mail->SMTPAuth = true;
     // TODO: configurar correo y contraseña desde el cual se enviarán los correos
     $mail->Username = 'sandy.r@jordandesajonia.edu.co';
-    $mail->Password = '********';
+    $mail->Password = 'Jordan2023';
     $mail->SMTPSecure = 'tls';
     $mail->Port = 587;
 

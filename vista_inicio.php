@@ -1,9 +1,10 @@
 <!-- leyenda inicio-->
 <div class="height-100 bg-light container">
-    <div class="precentacion">
+    <div class="presentacion">
         <br><br><br><br><br><br><br><br><br>
-        <p>SGA</p>
-        <h2>Sistema de Gestion Administrativa</h2>
+        <p>JDS</p>
+        <h2>Mesa De Ayuda</h2>
+        
     </div>
 </div>
 </div>

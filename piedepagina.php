@@ -6,7 +6,7 @@
             <div class="col-md-6">2022 © SGA - ADSI </div>
             <div class="col-md-6">
                 <div class="text-md-right footer-links d-none d-md-block">
-                    <a href="mailto:servicioalcliente@servicredito.com.co">Contactame Aqui!</a>
+                    <a href="mailto:sistemas@jordandesajonia.edu.co">Contactame Aqui!</a>
                 </div>
             </div>
         </div>

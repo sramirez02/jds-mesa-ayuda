@@ -2,7 +2,7 @@
     <nav class="nav">
         <div>
             <a href="Inicio.php" class="nav_logo">
-                <img src="public/img/Captura.png" alt="">
+                <img src="public/img/coljds.png" alt="" width="160" height="150">
             </a>
             <hr>
             <div class="nav_list">

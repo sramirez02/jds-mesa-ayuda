@@ -26,7 +26,7 @@ if (isset($_SESSION['id'])) {
             }
 
             .bg-custom {
-                background-color: #09090a;
+                background-color: black;
             }
 
             .btn-custom {
@@ -65,31 +65,30 @@ if (isset($_SESSION['id'])) {
     <body>
         <div class="row m-0 h-100">
             <div class="col p-0 text-center d-flex justify-content-center align-items-center display-none">
-                <img src="public/img/s.png" class="#">
+                <img src="public/img/jds.jpg" class="#" width="1000" height="700">
             </div>
-            <div class="col p-0 bg-custom d-flex justify-content-center align-items-center flex-column w-100">
+            <div class="col p-0 bg-custom d-flex justify-content-center align-items-center flex-column w-50">
                 <div>
-                    <h1>SGA</h1>
+                <br>
+                    <h1>JDS</h1>
                 </div>
-                <img src="public/img/logo.png" class="#">
+                <img src="public/img/logojds.jpg" class="#">
                 <br>
-                <br>
+                
                 <form class="w-75" action="validar.php" method="post">
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">Usuario</label>
-                        <input type="text" class="form-control" id="exampleFormControlInput1" name="usuario"
-                            placeholder="usuario" required>
+                        <input type="text" class="form-control" id="exampleFormControlInput1" name="usuario" placeholder="usuario" required>
                     </div>
                     <div class="mb-3">
                         <label for="exampleFormControlInput2" class="form-label">Contraseña</label>
-                        <input type="password" class="form-control" id="exampleFormControlInput2" name="contrasena"
-                            placeholder="contraseña" required>
+                        <input type="password" class="form-control" id="exampleFormControlInput2" name="contrasena" placeholder="contraseña" required>
                     </div>
                     <!-- TODO: quitar etiqueta <a> y dejar solo boton -->
 
                     <button type="submit" class="btn btn-custom btn-lg btn-block mt-3">Ingresar</button>
 
-                    <div class="d-flex justify-content-center mt-1">
+                    <div class="d-flex justify-content-center mt-2">
                         <label for="exampleFormControlInput1" class="form-label">Version 1.0</label>
                     </div>
 
@@ -102,6 +101,6 @@ if (isset($_SESSION['id'])) {
 
     <br>
     <br>
-    <?php
+<?php
 }
 ?>
