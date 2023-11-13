@@ -1,42 +1,10 @@
 <?php
 session_start();
-//codigo para enviar correo
-// use PHPMailer\PHPMailer\PHPMailer;
-// use PHPMailer\PHPMailer\Exception;
 
-
-// require_once('libraries/PHPMailer/src/PHPMailer.php');
-// require_once('libraries/PHPMailer/src/Exception.php');
-// require_once('libraries/PHPMailer/src/SMTP.php');
-
-
-// $destinatario = "sdanitzaramirez@gmail.com";
-// $asunto = "Proyecto JDS";
-// $mensaje = "Este es el contenido del correo.";
-
-// // Configurar el objeto PHPMailer
-// $mail = new PHPMailer();
-// $mail->isSMTP();
-// $mail->Host = 'smtp.gmail.com';
-// $mail->SMTPAuth = true;
-// $mail->Username = 'sandy.r@jordandesajonia.edu.co';
-// $mail->Password = '12345';
-// $mail->SMTPSecure = 'tls';
-// $mail->Port = 587;
-
-// $mail->setFrom($mail->Username,'Mesa de ayuda JDS');
-// $mail->addAddress($destinatario);
-// $mail->Subject = $asunto;
-// $mail->Body = $mensaje; 
-
-// // Enviar el correo
-// if($mail->send()) {
-//     echo "Correo enviado correctamente";
-// } else {
-//     echo "Error al enviar el correo: " . $mail->ErrorInfo;
-// }
 
 if (isset($_SESSION['id'])) {
+    // $fecha_inicio = date("Y-m-d", strtotime("-1 months"));
+    $fecha_final = date("Y-m-d");
     $filtro = "";
     $id_empleado = $_SESSION['id'];
     require_once('menu_superior.php');
@@ -54,7 +22,16 @@ if (isset($_SESSION['id'])) {
 
     if (isset($_GET['filtro']) and !empty($_GET['filtro'])) {
         $filtro = $_GET['filtro'];
-        $sqlStmt = $sqlStmt . "AND estado.id = $filtro";
+        $sqlStmt = $sqlStmt . "AND estado.id = $filtro ";
+    }
+
+    if (
+        isset($_GET['fecha_inicio']) and !empty($_GET['fecha_inicio']) and
+        isset($_GET['fecha_final']) and !empty($_GET['fecha_final'])
+    ) {
+        $fecha_inicio = $_GET['fecha_inicio'];
+        $fecha_final = $_GET['fecha_final'];
+        $sqlStmt = $sqlStmt . "AND fecha_registro BETWEEN '$fecha_inicio 00:00:00' AND '$fecha_final 23:59:59' ";
     }
     $stmt = $conn->prepare($sqlStmt);
     $stmt->execute();
@@ -66,35 +43,59 @@ if (isset($_SESSION['id'])) {
     <br><br><br><br>
     <div class="height-100 bg-light container">
         <div class="row">
-            <h2>Solicitudes</h2>
+            <div class="col-sm-10">
+                <h2>Solicitudes (
+                    <?= count($rows) ?>)
+                </h2>
+            </div>
+            <div class="col-sm-2 d-flex justify-content-end">
+                <a href="nuevasolicitud.php">
+                    <button type="button" class="btn btn-info">Crear Solicitud</button>
+                </a>
+            </div>
+
         </div>
         <hr>
 
         <div class="row g-5">
             <form action="" method="get" class="needs-validation" novalidate>
                 <div class="row g-3">
-                    <div class="col-sm-1">
-                        <label for="inputPassword6" class="col-form-label">Mostrar</label>
+                    <div class="col-sm-3">
+                        <div class="input-group mb-3">
+                            <label class="input-group-text" for="inputGroupSelect01">Estado</label>
+                            <select class="form-select" id="inputGroupSelect01" name='filtro'>
+                                <option value="">Todos</option>
+                                <?php
+                                foreach ($filtro_mostrar as $row1) { ?>
+                                    <option value="<?= $row1->id_estado ?>" <?= $row1->id_estado == $filtro ? "selected" : "" ?>>
+                                        <?= $row1->nombre_estado ?>
+                                    </option>
+                                <?php } ?>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-3">
+                        <div class="input-group">
+                            <span class="input-group-text">Fecha Inicio</span>
+                            <input value="<?= $fecha_inicio ?>" id="fecha_inicio" class="form-control" type="date"
+                                name="fecha_inicio" />
+                        </div>
+                    </div>
+
+                    <div class="col-sm-3">
+                        <div class="input-group">
+                            <span class="input-group-text">Fecha Final</span>
+                            <input value="<?= $fecha_final ?>" id="fecha_final" class="form-control" type="date"
+                                name="fecha_final" />
+                        </div>
                     </div>
 
                     <div class="col-sm-2">
-                        <select class="form-select" aria-label="Default select example" name='filtro'>
-                            <option value="">Todos</option>
-                            <?php
-                            foreach ($filtro_mostrar as $row1) { ?>
-                                <option value="<?= $row1->id_estado ?>" <?= $row1->id_estado == $filtro ? "selected" : "" ?>>
-                                    <?= $row1->nombre_estado ?>
-                                </option>
-                            <?php } ?>
-                        </select>
                     </div>
-                    <div class="col-sm-7">
+
+                    <div class="col-sm-1 d-flex justify-content-end">
                         <button type="submit" class="btn btn-success">filtrar</button>
-                    </div>
-                    <div class="col-sm-2">
-                        <a href="nuevasolicitud.php">
-                            <button type="button" class="btn btn-info">Crear Solicitud</button>
-                        </a>
                     </div>
                 </div>
             </form>
