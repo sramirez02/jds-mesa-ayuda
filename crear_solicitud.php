@@ -41,6 +41,7 @@ if (
     $nombre_usuario = $_SESSION['nombre'];
 
     $destinatario = "sdanitzaramirez@gmail.com";
+    $destinatario2 = "danitzarico1234@gmail.com";
     $asunto = "Nueva solicitud de soporte técnico";
     $mensaje = "Colaborador sajoniano, \n\n
 Se ha generado una nueva solicitud de soporte técnico con los siguientes datos:\n
@@ -66,9 +67,12 @@ atentamente, area de soporte técnico";
 
     $mail->setFrom($mail->Username, 'Mesa de ayuda JDS');
     $mail->addAddress($destinatario);
+    $mail->addAddress($destinatario2);
     $mail->Subject = $asunto;
     $mail->Body = $mensaje;
 
+
+    
     if ($mail->send()) {
         echo "Correo enviado correctamente";
     } else {
