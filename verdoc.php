@@ -2,6 +2,7 @@
 <br>
 <br>
 <?php
+
 session_start();
 if (isset($_SESSION['id'])) {
     require_once('menu_superior.php');
@@ -47,7 +48,7 @@ if (isset($_SESSION['id'])) {
             <div class="row g-5">
                 <div>
                     <br>
-                    <form action="accion_modificar_s.php" method="post" class="needs-validation" novalidate>
+                    <form action="accion_modificar_s.php" method="post" class="needs-validation" novalidate onsubmit="this.querySelectorAll('.required-element').forEach(i => i.disabled = false)">
                         <div class="row g-3">
                             <div class="col-sm-12">
                                 <label for="nombre" class="form-label">Nombre </label>
@@ -76,7 +77,7 @@ if (isset($_SESSION['id'])) {
 
                             <div class="col-sm-4">
                                 <label for="motivo" class="form-label">Motivo</label>
-                                <select class="form-select" id="motivo" required disabled>
+                                <select class="form-select required-element" name="motivo_solicitud" required disabled>
                                     <option value="<?= $row->id_motivo ?>">
                                         <?= $row->nombre_motivo ?>
                                     </option>
@@ -85,15 +86,15 @@ if (isset($_SESSION['id'])) {
 
                             <div class="col-sm-4">
                                 <label for="lugar" class="form-label">Lugar</label>
-                                <input id="lugar" class="form-control" name="lugar" value="<?= $row->lugar ?>" required disabled />
+                                <input id="lugar" class="form-control required-element" name="lugar" value="<?= $row->lugar ?>" required disabled/>
                             </div>
 
                             <br>
                             <br class="my-4">
                             <div class="row gy-6">
                                 <div class="col-md-12">
-                                    <label for="observaciones" class="form-label">Observaciones </label>
-                                    <textarea class="form-control" rows="2" id="observaciones" name="observaciones" required disabled><?= $row->observaciones ?></textarea>
+                                    <label for="observaciones" class="form-label ">Observaciones </label>
+                                    <textarea class="form-control required-element" rows="2" id="observaciones" name="observaciones" required disabled><?= $row->observaciones ?></textarea>
                                 </div>
                             </div>
 
@@ -121,9 +122,9 @@ if (isset($_SESSION['id'])) {
                                         </div>
                                         <div class="modal-footer">
                                             <a href="#">
-                                                <button type="subbmit" name="cancelar" value="2" class="btn btn-success" data-bs-toggle="modal">Enviar</button>
+                                                <button type="subbmit" name="cancelar" value="6" class="btn btn-success" data-bs-toggle="modal">Enviar</button>
                                             </a>
-                                            <a href="#" <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+                                            <a href="#"> <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
                                             </a>
                                         </div>
                                     </div>
@@ -217,7 +218,7 @@ if (isset($_SESSION['id'])) {
                                                     <a href="#">
                                                         <button type="subbmit" name="cancelar" value="1" class="btn btn-success" data-bs-toggle="modal">Enviar</button>
                                                     </a>
-                                                    <a href="#" <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+                                                    <a href="#"> <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
                                                     </a>
                                                 </div>
                                             </div>
@@ -321,7 +322,7 @@ if (isset($_SESSION['id'])) {
                                                         <a href="#">
                                                             <button type="subbmit" name="modificar" value="3" class="btn btn-success" data-bs-toggle="modal">Enviar</button>
                                                         </a>
-                                                        <a href="#" <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+                                                        <a href="#"><button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
                                                         </a>
                                                     </div>
                                                 </div>
@@ -350,9 +351,9 @@ if (isset($_SESSION['id'])) {
                                                     </div>
                                                     <div class="modal-footer">
                                                         <a href="#">
-                                                            <button type="subbmit" name="cancelar" value="2" class="btn btn-success" data-bs-toggle="modal">Enviar</button>
+                                                            <button type="subbmit" name="cancelar" value="6" class="btn btn-success" data-bs-toggle="modal">Enviar</button>
                                                         </a>
-                                                        <a href="#" <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+                                                        <a href="#"> <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
                                                         </a>
                                                     </div>
                                                 </div>
