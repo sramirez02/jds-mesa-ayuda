@@ -140,7 +140,7 @@ if (isset($_SESSION['id'])) {
                                         <button type="subbmit" name="autorizar" value="1" class="btn btn-success"
                                             data-bs-toggle="modal">Enviar</button>
                                     </a>
-                                    <a href="#" <button type="button" class="btn btn-danger"
+                                    <a href="#"> <button type="button" class="btn btn-danger"
                                         data-bs-dismiss="modal">Cerrar</button>
                                     </a>
                                 </div>
@@ -170,7 +170,7 @@ if (isset($_SESSION['id'])) {
                                         <button type="subbmit" name="negar" value="2" class="btn btn-success"
                                             data-bs-toggle="modal">Enviar</button>
                                     </a>
-                                    <a href="#" <button type="button" class="btn btn-danger"
+                                    <a href="#"> <button type="button" class="btn btn-danger"
                                         data-bs-dismiss="modal">Cerrar</button>
                                     </a>
                                 </div>

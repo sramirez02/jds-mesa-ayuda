@@ -64,7 +64,7 @@ $mail->Host = 'smtp.gmail.com';
 $mail->SMTPAuth = true;
 // TODO: configurar correo y contraseña desde el cual se enviarán los correos
 $mail->Username = 'sandy.r@jordandesajonia.edu.co';
-$mail->Password = 'Jordan2023';
+$mail->Password = 'poner contraseña';
 $mail->SMTPSecure = 'tls';
 $mail->Port = 587;
 
